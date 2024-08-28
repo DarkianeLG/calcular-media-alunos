@@ -33,7 +33,7 @@ function calcularMedia() {
         let nome = nomeDoAluno.value; // Obter o nome do aluno
         if (media >= 7 && media <= 10) {
             resultado.textContent = `Excelente trabalho! O(a) aluno(a) ${nome} foi aprovado(a) com uma média de ${media.toFixed(1)}.`;
-        } 
+        }
         else if (media >= 4 && media <= 6.9) {
             resultado.textContent = `O(a) aluno(a) ${nome} está na final com uma média de ${media.toFixed(1)}.`;
         }
@@ -43,7 +43,7 @@ function calcularMedia() {
         else {
             resultado.textContent = `ATENÇÃO! Os valores das notas devem ser entre 0 e 10.`;
         }
-    } 
+    }
     else {
         resultado.textContent = `Por favor, insira valores válidos para calcular a média.`;
     }
