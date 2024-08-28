@@ -5,13 +5,12 @@ let primeiraNota = document.querySelector('#primeira-nota');
 let segundaNota = document.querySelector('#segunda-nota');
 let terceiraNota = document.querySelector('.terceira-nota');
 let btMediaSituacao = document.querySelector('.media-situacao');
-let btLimpar = document.querySelector('.limpar')
+let btLimpar = document.querySelector('.limpar');
 let resultado = document.querySelector('.resultado');
 let nota3;
 
 // Função para calcular a média
 function calcularMedia() {
-
     // Obtenha os valores das notas e converta para número
     let nota1 = parseFloat(primeiraNota.value);
     let nota2 = parseFloat(segundaNota.value);
@@ -30,24 +29,28 @@ function calcularMedia() {
     }
 
     // Verifica a situação do aluno
-
     if (media !== undefined) {
         let nome = nomeDoAluno.value; // Obter o nome do aluno
-        if (media >= 7) {
-            resultado.textContent = `Excelente trabalho! O aluno ${nome} foi aprovado com uma média ${media.toFixed(1)}`;
-        } else if (media < 4) {
-            resultado.textContent = `Infelizmente, o aluno ${nome} não alcançou a média necessária e foi reprovado. Com uma média ${media.toFixed(1)}.`;
-        } else {
-            resultado.textContent = `O aluno ${nome} está na final! Com uma média ${media.toFixed(1)}.`;
+        if (media >= 7 && media <= 10) {
+            resultado.textContent = `Excelente trabalho! O(a) aluno(a) ${nome} foi aprovado(a) com uma média de ${media.toFixed(1)}.`;
+        } 
+        else if (media >= 4 && media <= 6.9) {
+            resultado.textContent = `O(a) aluno(a) ${nome} está na final com uma média de ${media.toFixed(1)}.`;
         }
-    } else {
+        else if (media < 4) {
+            resultado.textContent = `Infelizmente, o(a) aluno(a) ${nome} não alcançou a média necessária e foi reprovado(a) com uma média de ${media.toFixed(1)}.`;
+        }
+        else {
+            resultado.textContent = `ATENÇÃO! Os valores das notas devem ser entre 0 e 10.`;
+        }
+    } 
+    else {
         resultado.textContent = `Por favor, insira valores válidos para calcular a média.`;
     }
 }
 
+// Adiciona um event listener ao botão de "Adicionar Três Notas"
 tresNotas.addEventListener('click', () => {
-
-    // Limpa os valores dos campos de input da primeira, segunda nota e o nome do aluno
     nomeDoAluno.value = "";
     primeiraNota.value = "";
     segundaNota.value = "";
@@ -55,7 +58,6 @@ tresNotas.addEventListener('click', () => {
 
     // Verifica se o campo da terceira nota já foi criado
     if (!nota3) {
-
         // Cria um rótulo (label) para a terceira nota
         let nota3Label = document.createElement("label");
         nota3Label.setAttribute("for", "terceira-nota");
@@ -73,9 +75,8 @@ tresNotas.addEventListener('click', () => {
     }
 });
 
+// Adiciona um event listener ao botão de "Adicionar Duas Notas"
 duasNotas.addEventListener('click', () => {
-
-    // Limpa os valores dos campos de input da primeira, segunda nota e o nome do aluno
     nomeDoAluno.value = "";
     primeiraNota.value = "";
     segundaNota.value = "";
@@ -93,9 +94,11 @@ btLimpar.addEventListener('click', () => {
     nomeDoAluno.value = "";
     primeiraNota.value = "";
     segundaNota.value = "";
-    nota3.value = "";
-    resultado.textContent = "";
+    if (nota3) {
+        nota3.value = ""; // Limpa o valor da terceira nota, se existir
+    }
+    resultado.textContent = ""; // Limpa o resultado
 });
 
-// Chamando a função de calcular a média
+// Adiciona um event listener ao botão de "Calcular Média"
 btMediaSituacao.addEventListener('click', calcularMedia);
